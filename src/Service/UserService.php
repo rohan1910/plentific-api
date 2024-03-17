@@ -34,6 +34,7 @@ class UserService implements UserServiceInterface
         try {
             $createUser = $this->client->post('/users', [
                 'json' => [
+                    'id' => $this->generateUserId(),
                     'name' => $name,
                     'job' => $job,
                     'email' => $email
@@ -109,5 +110,15 @@ class UserService implements UserServiceInterface
         }
 
         return $userDataArray;
+    }
+
+    /**
+     * Generate unique user ID
+     * Ideally would use Id from DB when 
+     * row/data is added
+     */
+    public function generateUserId()
+    {
+        return uniqid();
     }
 }
